@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/beanio-2.0.7/beanio.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-beanutils-1.9.2/commons-beanutils-1.9.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-beanutils-1.9.2/commons-beanutils-1.9.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-beanutils-1.9.2/commons-beanutils-1.9.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-beanutils-1.9.2/commons-beanutils-1.9.2-tests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-beanutils-1.9.2/commons-beanutils-1.9.2-test-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-collections4-4.1-bin.zip"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-collections4-4.1/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-collections4-4.1/commons-collections4-4.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-logging-1.2/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-logging-1.2/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/org/apache/camel/camel-jms/2.10.4/camel-jms-2.10.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/com/ibm/com.ibm.mq/7.0.1.6/com.ibm.mq-7.0.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/com/ibm/com.ibm.mq.jmqi/7.0.1.6/com.ibm.mq.jmqi-7.0.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/com/ibm/com.ibm.mqjms/7.0.1.6/com.ibm.mqjms-7.0.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/com/ibm/mq/commonservices/commonservices/7.0.1.6/commonservices-7.0.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/com/ibm/mq/dhbcore/dhbcore/7.0.1.6/dhbcore-7.0.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/javax/resource/connector-api/1.6-alpha-1/connector-api-1.6-alpha-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/.m2/repository/javax/jms/jms/1.1/jms-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/server/jboss-eap-6.1_Oracle_Upgrade/modules/javax/jms/api/main/jboss-jms-api_1.1_spec-1.0.1.Final-redhat-2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/log4j-1.2.17/apache-log4j-1.2.17/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/GITHUB/gds_interline/tr-purchase-message-emd/target/tr-purchase-message-emd-18.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arunasom/Downloads/proj_JARS/commons-lang3-3.8.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

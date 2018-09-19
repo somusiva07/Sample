@@ -1,0 +1,397 @@
+01/11/2017 20:07:21 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+03/01/2018 14:59:09:[main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnectionClient.main(JMSConnectionClient.java:42)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnectionClient.main(JMSConnectionClient.java:42)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+05/01/2018 21:18:39 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+05/01/2018 21:18:50 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+05/01/2018 21:22:20 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+05/01/2018 21:23:16 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+05/01/2018 21:39:43 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+09/01/2018 20:11:22 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+18/01/2018 20:37:50 [main] com.ibm.msg.client.wmq.internal.WMQConnection
+Exception ignored as no exception listener is registered: '
+                       Message : com.ibm.msg.client.jms.DetailedJMSException: JMSWMQ1107: A problem with this connection has occurred. An error has occurred with the WebSphere MQ JMS connection. Use the linked exception to determine the cause of this error.
+                         Class : class com.ibm.msg.client.jms.DetailedJMSException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.reasonToException(Reason.java:608)
+                               : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:236)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+     Caused by [1] --> Message : com.ibm.mq.MQException: JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2009' ('MQRC_CONNECTION_BROKEN').
+                         Class : class com.ibm.mq.MQException
+                         Stack : com.ibm.msg.client.wmq.common.internal.Reason.createException(Reason.java:223)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.checkJmqiCallSuccess(WMQMessageConsumer.java:122)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.getMsg(WMQConsumerShadow.java:1314)
+                               : com.ibm.msg.client.wmq.internal.WMQSyncConsumerShadow.receiveInternal(WMQSyncConsumerShadow.java:233)
+                               : com.ibm.msg.client.wmq.internal.WMQConsumerShadow.receive(WMQConsumerShadow.java:1038)
+                               : com.ibm.msg.client.wmq.internal.WMQMessageConsumer.receive(WMQMessageConsumer.java:459)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:780)
+                               : com.ibm.msg.client.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:348)
+                               : com.ibm.mq.jms.MQMessageConsumer.receive(MQMessageConsumer.java:228)
+                               : com.sample.JMSConnection.main(JMSConnection.java:56)
+'
+
+EXPLANATION:
+An attempt was made to deliver an exception to the connections exception listener but a listener has not been registered
+
+ACTION:
+An exception listener must be registered with the connection to receive its exceptions
+--------------------------------------------------------------------
+17/05/2018 17:01:44 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+18/05/2018 15:03:16 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+18/05/2018 15:05:01:[main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+18/05/2018 15:08:49 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+18/05/2018 15:09:18 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+18/05/2018 16:06:57 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+18/05/2018 16:11:16 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+21/06/2018 21:14:22 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+22/06/2018 19:55:22 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+22/06/2018 19:56:27 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+22/06/2018 21:11:34 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
+22/06/2018 21:12:35 [main] com.ibm.msg.client.jms.internal.JmsConnectionImpl
+Calling receive will not return a message for a connection that is stopped.
+
+EXPLANATION:
+The JMS specification says that calling the receive() method must not return a message if the connection is stopped. Calling receiveNoWait or receive with a timeout will return null when the timeout expires. Calling receive with no timeout will not return until the connection is started or closed or the application terminates.
+
+ACTION:
+Start the connection by calling javax.jms.Connection.start(). 
+--------------------------------------------------------------------
